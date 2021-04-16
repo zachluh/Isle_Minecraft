@@ -28,7 +28,6 @@ public class WorkStationEvents implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
        Player player = event.getPlayer();
-       player.sendMessage("it passed");
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             Block block = event.getClickedBlock();
             int xAxis = block.getLocation().getBlockX();
@@ -45,7 +44,6 @@ public class WorkStationEvents implements Listener {
     @EventHandler
     public void onGuiInteract(InventoryClickEvent event) {
         if (event.getView().getTitle().equals("Material Compressor")) {
-            Bukkit.broadcastMessage("inventory opened");
                     if (event.getCurrentItem().getType().equals(Material.COAL_BLOCK)) {
                         event.getClickedInventory().setItem(event.getSlot(), mats.Plastic(event.getCurrentItem().getAmount()));
             }

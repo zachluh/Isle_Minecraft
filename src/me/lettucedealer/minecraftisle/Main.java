@@ -1,7 +1,6 @@
 package me.lettucedealer.minecraftisle;
 
 import me.lettucedealer.minecraftisle.events.ArtifactEvents;
-import me.lettucedealer.minecraftisle.events.StickEvent;
 import me.lettucedealer.minecraftisle.events.WorkStationEvents;
 import me.lettucedealer.minecraftisle.items.Artifacts;
 import me.lettucedealer.minecraftisle.recipes.Recipes;
@@ -20,7 +19,6 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         getLogger().info("very base");
-        Bukkit.getServer().getPluginManager().registerEvents(new StickEvent(this), this);
         Bukkit.getServer().getPluginManager().registerEvents(new ArtifactEvents(this), this);
         Bukkit.getServer().getPluginManager().registerEvents(new WorkStationEvents(this), this);
         Bukkit.getServer().getPluginManager().registerEvents(new Recipes(this), this);
@@ -95,17 +93,7 @@ public class Main extends JavaPlugin {
             }
         }
 
-        if (label.equalsIgnoreCase("artifacta")) {
-            Player player = (Player) sender;
 
-            player.getInventory().addItem(artifacts.artifactA());
-        }
-
-        if (label.equalsIgnoreCase("artifactb")) {
-            Player player = (Player) sender;
-
-            player.getInventory().addItem(artifacts.artifactB());
-        }
 
 
 

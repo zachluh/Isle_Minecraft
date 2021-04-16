@@ -14,6 +14,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -56,19 +57,23 @@ public class ArtifactEvents implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent e) {
         Player player = e.getPlayer();
-        if (player.getInventory().getItemInMainHand().getItemMeta().getDisplayName().contains("Artifact B")) {
-            isActive = !isActive;
-            if (isActive) {
-                player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Artifact B" + ChatColor.GREEN + " has been activated");
-                player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 3));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 3));
-                player.sendMessage(ChatColor.GREEN + "You feel way stronger than before");
-            }
+        ItemStack item = player.getInventory().getItemInMainHand();
 
-            else {
-                player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Artifact B" + ChatColor.GREEN + " has been deactivated");
-                player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
-                player.removePotionEffect(PotionEffectType.SPEED);
+        if (item != null && item.hasItemMeta()) {
+            if (item.getItemMeta().getDisplayName().contains("Artifact B")) {
+                isActive = !isActive;
+                if (isActive) {
+                    player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Artifact B" + ChatColor.GREEN + " has been activated");
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 3));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 3));
+                    player.sendMessage(ChatColor.GREEN + "You feel way stronger than before");
+                }
+
+                else {
+                    player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Artifact B" + ChatColor.GREEN + " has been deactivated");
+                    player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
+                    player.removePotionEffect(PotionEffectType.SPEED);
+                }
             }
         }
     }
@@ -86,13 +91,13 @@ public class ArtifactEvents implements Listener {
     }
 
     @EventHandler
-    public void onClickEvent(InventoryClickEvent e) {
+    public void onMoveEvent(PlayerMoveEvent e) {
 
         hasNightVision = false;
         hasBallistic = false;
-        Player player = (Player) e.getWhoClicked();
+        Player player = e.getPlayer();
         AttributeInstance health = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-        for (ItemStack item: e.getWhoClicked().getInventory().getArmorContents()) {
+        for (ItemStack item: player.getInventory().getArmorContents()) {
             if (item != null && item.hasItemMeta()) {
                 if (item.getItemMeta().getDisplayName().contains("Night Vision Goggles")) {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 3));

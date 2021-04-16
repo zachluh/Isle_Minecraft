@@ -138,12 +138,12 @@ public class Recipes implements Listener {
     public void onCraft(PrepareItemCraftEvent event) {
 
         if (event.getRecipe() != null){
-            getLogger().info("2");
+
             ItemStack result = event.getRecipe().getResult();
 
 
             if (result.hasItemMeta() && results.contains(result.getItemMeta().getDisplayName())) {
-                getLogger().info("3");
+
 
                 boolean foundspecial = false;
                 for (ItemStack item: event.getInventory().getMatrix()) {
@@ -159,11 +159,11 @@ public class Recipes implements Listener {
                     getLogger().info("4");
                     event.getInventory().setResult(null);
                 }
-            }
-            getLogger().info("5");
 
-            ItemStack invresult = event.getInventory().getResult();
-            checkMultiples(event, invresult);
+                ItemStack invresult = event.getInventory().getResult();
+                checkMultiples(event, invresult);
+            }
+
 
         }
     }
