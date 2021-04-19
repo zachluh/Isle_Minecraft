@@ -3,10 +3,15 @@ package me.lettucedealer.minecraftisle.events;
 import me.lettucedealer.minecraftisle.Main;
 import me.lettucedealer.minecraftisle.items.Artifacts;
 import me.lettucedealer.minecraftisle.items.Headwear;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,6 +23,10 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.ArrayList;
+
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 public class ArtifactEvents implements Listener {
     public Artifacts artifacts = new Artifacts();
@@ -93,6 +102,7 @@ public class ArtifactEvents implements Listener {
     @EventHandler
     public void onMoveEvent(PlayerMoveEvent e) {
 
+        boolean isThere = false;
         hasNightVision = false;
         hasBallistic = false;
         Player player = e.getPlayer();
@@ -114,6 +124,31 @@ public class ArtifactEvents implements Listener {
             }
         }
 
+
+
+        for (ItemStack item: player.getInventory().getContents()) {
+
+            if (item != null && item.hasItemMeta()) {
+                if (item.getItemMeta().getDisplayName().contains("Artifact C")) {
+                    isThere = true;
+
+
+                }
+
+            }
+
+
+        }
+
+        if (isThere) {
+            glowEntitiesInChunks(player, true);
+        }
+
+        else {
+            glowEntitiesInChunks(player, false);
+
+        }
+
         if (!hasNightVision) {
             player.removePotionEffect(PotionEffectType.NIGHT_VISION);
         }
@@ -122,6 +157,40 @@ public class ArtifactEvents implements Listener {
             health.setBaseValue(20);
             player.setHealth(health.getValue());
         }
+
+
+    }
+
+    public void glowEntitiesInChunks(Player player, boolean isRunning) {
+
+
+
+        Chunk playerChunk = player.getLocation().getChunk();
+        ArrayList<Chunk> chunks = new ArrayList<>();
+        chunks.add(playerChunk);
+
+        for(int x=-17;x<=17;x++) {
+            for(int z=-17;z<=17;z++) {
+                 chunks.add(new Location(player.getWorld(), (playerChunk.getX() + x), 64, (playerChunk.getZ()) + z).getChunk());
+            }
+        }
+
+        for (Chunk chunk: chunks) {
+           Entity[] entities = chunk.getEntities();
+           for (Entity entity: entities) {
+                   if (entity instanceof Monster && isRunning) {
+                       entity.setGlowing(true);
+                    }
+                   if(!isRunning) {
+                       for (Entity superentity : player.getWorld().getEntities()) {
+                           superentity.setGlowing(false);
+                       }
+                   }
+
+           }
+        }
+
+
     }
 
 }

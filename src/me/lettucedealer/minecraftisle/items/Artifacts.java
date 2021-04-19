@@ -47,6 +47,23 @@ public class Artifacts {
         return artifact;
     }
 
+    public ItemStack artifactC() {
+        ItemStack artifact = new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
+        ItemMeta meta = artifact.getItemMeta();
+        meta.setDisplayName(ChatColor.BLUE + "" + ChatColor.BOLD + "Artifact C");
+        List<String> lore = new ArrayList<String>();
+        lore.add(ChatColor.GREEN + "" + ChatColor.ITALIC + "See everything");
+        meta.setLore(lore);
+
+        meta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 1, true);
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        artifact.setItemMeta(meta);
+
+        return artifact;
+    }
+
     public ItemStack artifactD() {
         ItemStack artifact = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
         ItemMeta meta = artifact.getItemMeta();

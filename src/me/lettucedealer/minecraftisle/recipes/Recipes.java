@@ -63,6 +63,20 @@ public class Recipes implements Listener {
         return recipe;
     }
 
+    public ShapedRecipe artifact_c_recipe(Main plugin) {
+        ItemStack item = artifacts.artifactC();
+
+        NamespacedKey key = new NamespacedKey(plugin, "artifact_c");
+        ShapedRecipe recipe = new ShapedRecipe(key, item);
+
+        recipe.shape(" A ", "ABA", " A ");
+
+        recipe.setIngredient('A', Material.LAPIS_BLOCK);
+        recipe.setIngredient('B', Material.NETHER_STAR);
+
+        return recipe;
+    }
+
     public ShapedRecipe artifact_d_recipe(Main plugin) {
         ItemStack item = artifacts.artifactD();
 

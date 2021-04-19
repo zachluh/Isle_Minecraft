@@ -24,6 +24,7 @@ public class Main extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new Recipes(this), this);
         Bukkit.addRecipe(recipes.artifact_a_recipe(this));
         Bukkit.addRecipe(recipes.artifact_b_recipe(this));
+        Bukkit.addRecipe(recipes.artifact_c_recipe(this));
         Bukkit.addRecipe(recipes.artifact_d_recipe(this));
         Bukkit.addRecipe(recipes.night_vision_recipe(this));
         Bukkit.addRecipe(recipes.compressor_recipe(this));
