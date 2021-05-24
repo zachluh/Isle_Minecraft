@@ -28,6 +28,7 @@ public class Recipes implements Listener {
     private Workstations workstations = new Workstations();
     private Materials materials = new Materials();
     private Armor armor = new Armor();
+    private Weapons weapons = new Weapons();
 
     String[] r = {"Kevlar", "Ballistic Vest"};
     String[] m = {"Plastic", "Kevlar"};
@@ -143,6 +144,21 @@ public class Recipes implements Listener {
         recipe.shape("A A", "AAA", "AAA");
 
         recipe.setIngredient('A', Material.DRIED_KELP);
+
+
+        return recipe;
+    }
+
+    public ShapedRecipe scoped_rifle_recipe(Main plugin) {
+        ItemStack item = weapons.scoped_rifle("1");
+
+        NamespacedKey key = new NamespacedKey(plugin, "scoped_rifle");
+        ShapedRecipe recipe = new ShapedRecipe(key, item);
+
+        recipe.shape("A  ", " A ", " BA");
+
+        recipe.setIngredient('A', Material.STICK);
+        recipe.setIngredient('B', Material.NETHERITE_SCRAP);
 
 
         return recipe;

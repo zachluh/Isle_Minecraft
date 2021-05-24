@@ -30,6 +30,7 @@ public class Main extends JavaPlugin {
         Bukkit.addRecipe(recipes.compressor_recipe(this));
         Bukkit.addRecipe(recipes.kevlar_recipe(this));
         Bukkit.addRecipe(recipes.ballistic_recipe(this));
+        Bukkit.addRecipe(recipes.scoped_rifle_recipe(this));
     }
 
     @Override
