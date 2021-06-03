@@ -14,7 +14,7 @@ public class Weapons {
     public ItemStack scoped_rifle(String ammo) {
         ItemStack sniper = new ItemStack(Material.WOODEN_HOE);
         ItemMeta meta = sniper.getItemMeta();
-        meta.setDisplayName(ChatColor.GREEN + "Scoped Rifle");
+        meta.setDisplayName("Scoped Rifle");
         List<String> lore = new ArrayList<String>();
         lore.add(ChatColor.ITALIC + ammo + " / " + ammo);
         meta.setLore(lore);

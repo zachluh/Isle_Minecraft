@@ -1,9 +1,12 @@
 package me.lettucedealer.minecraftisle;
 
 import me.lettucedealer.minecraftisle.events.ArtifactEvents;
+import me.lettucedealer.minecraftisle.events.WeaponEvents;
 import me.lettucedealer.minecraftisle.events.WorkStationEvents;
 import me.lettucedealer.minecraftisle.items.Artifacts;
 import me.lettucedealer.minecraftisle.recipes.Recipes;
+import me.lettucedealer.minecraftisle.weaponry.Scoped_Rifle;
+import me.lettucedealer.minecraftisle.weaponry.Weapon;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -22,6 +25,7 @@ public class Main extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new ArtifactEvents(this), this);
         Bukkit.getServer().getPluginManager().registerEvents(new WorkStationEvents(this), this);
         Bukkit.getServer().getPluginManager().registerEvents(new Recipes(this), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new WeaponEvents(), this);
         Bukkit.addRecipe(recipes.artifact_a_recipe(this));
         Bukkit.addRecipe(recipes.artifact_b_recipe(this));
         Bukkit.addRecipe(recipes.artifact_c_recipe(this));
@@ -31,6 +35,10 @@ public class Main extends JavaPlugin {
         Bukkit.addRecipe(recipes.kevlar_recipe(this));
         Bukkit.addRecipe(recipes.ballistic_recipe(this));
         Bukkit.addRecipe(recipes.scoped_rifle_recipe(this));
+
+        //Weapon instantiation
+
+        Scoped_Rifle scoped_rifle = new Scoped_Rifle();
     }
 
     @Override
